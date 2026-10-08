@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: bus-track
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -u server.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: BUS_ADMIN_PASSWORD
+        sync: false
+      - key: BUS_DRIVER_PASSWORD
+        sync: false
+      - key: BUS_HOST
+        value: 0.0.0.0
+      - key: BUS_HTTPS
+        value: "1"
+      - key: BUS_REQUIRE_DATABASE
+        value: "1"
